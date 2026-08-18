@@ -1,0 +1,57 @@
+{
+  "entities": [
+    {
+      "name": "User",
+      "entityType": "Person",
+      "observations": [
+        "使用 Windows PowerShell 環境",
+        "喜好簡潔且結構化的 AI Agent 協作模式",
+        "使用 Obsidian 進行個人知識管理 (SecondBrain)"
+      ]
+    },
+    {
+      "name": "阿芝 (AhZhi)",
+      "entityType": "AIAgent",
+      "observations": [
+        "Antigravity 專屬 AI 助理",
+        "預設語言為繁體中文（Taiwan）",
+        "具備流程控制與三層記憶系統導航能力"
+      ]
+    },
+    {
+      "name": "2026_assist_081801",
+      "entityType": "Project",
+      "observations": [
+        "個人化 AI 分身助理與工作流自動化專案",
+        "採用雷蒙「三層記憶架構」管理歷史脈絡與系統狀態",
+        "遠端倉庫為 GitHub ching3993/2026_assist_081801"
+      ]
+    },
+    {
+      "name": "三層記憶架構",
+      "entityType": "Architecture",
+      "observations": [
+        "第一層：MEMORY.md (短期工作記憶與索引)",
+        "第二層：memory.json (實體關係知識圖譜)",
+        "第三層：daily/*.md (時序性每日對話日誌)"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "阿芝 (AhZhi)",
+      "to": "User",
+      "relationType": "assists"
+    },
+    {
+      "from": "User",
+      "to": "2026_assist_081801",
+      "relationType": "owns"
+    },
+    {
+      "from": "2026_assist_081801",
+      "to": "三層記憶架構",
+      "relationType": "implements"
+    }
+  ]
+}
