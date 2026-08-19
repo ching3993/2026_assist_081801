@@ -2,6 +2,11 @@
 
 所有對本專案與 AI Agent 系統的重大更新皆記錄於此。
 
+## [0.3.0] - 2026-08-19
+### 新增 (Added)
+- 發布**全域 Home Assistant 智慧家居控制技能 (`home_assistant_control`)** 至全域技能目錄 `C:\Users\ching\.gemini\config\skills\home_assistant_control\`
+- 全域支援「開燈/關燈/餐廳燈/廚房燈/客廳燈/戶外燈/冷氣」自然語言即時自動化控制與全域 `.env` 相容
+
 ## [0.2.0] - 2026-08-18
 ### 新增 (Added)
 - 導入雷蒙《21 天創造雷小蒙》「三層記憶架構」：
