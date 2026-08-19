@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "homeassistant": {
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "@thelord/enhanced-homeassistant-mcp"
+      ],
+      "env": {
+        "HOME_ASSISTANT_URL": "http://192.168.1.100:8123",
+        "HOME_ASSISTANT_TOKEN": "請在此貼上您的_LONG_LIVED_ACCESS_TOKEN"
+      }
+    }
+  }
+}
