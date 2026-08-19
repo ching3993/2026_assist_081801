@@ -13,7 +13,6 @@ function loadEnv() {
         const key = line.slice(0, idx).trim();
         let val = line.slice(idx + 1).trim();
 
-        // 如果值被雙引號包圍，提取雙引號內部的字元 (解決行尾註解問題)
         const doubleQuoteMatch = val.match(/^"([^"]*)"/);
         const singleQuoteMatch = val.match(/^'([^']*)'/);
 
@@ -22,7 +21,6 @@ function loadEnv() {
         } else if (singleQuoteMatch) {
           val = singleQuoteMatch[1];
         } else {
-          // 沒有引號時，裁切第一個 # 之前的內容
           const commentIdx = val.indexOf('#');
           if (commentIdx !== -1) {
             val = val.slice(0, commentIdx).trim();
@@ -43,17 +41,37 @@ function isAscii(str) {
   return /^[\x00-\x7F]*$/.test(str);
 }
 
+// 常用自然語言對照表
+const ENTITY_ALIAS = {
+  '餐廳燈': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c13b6c_relay_2' },
+  'dining': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c13b6c_relay_2' },
+  'dining_room': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c13b6c_relay_2' },
+  
+  '廚房燈': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c13b6c_relay_1' },
+  'kitchen': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c13b6c_relay_1' },
+  
+  '八樓客廳燈': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c14e11_relay_2' },
+  '客廳燈': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c14e11_relay_2' },
+  
+  '戶外燈': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c14e11_relay_1' },
+  'outdoor': { domain: 'switch', entity_id: 'switch.wall_switch_2_cbu_c14e11_relay_1' }
+};
+
 async function main() {
   if (!HA_URL || !HA_TOKEN || !isAscii(HA_TOKEN) || HA_TOKEN.includes('請在此貼上')) {
     console.log('❌ 尚未完成 Home Assistant 連線資訊設定！');
-    console.log('💡 原因：.env 檔案中的 HA_TOKEN 包含中文字或預設樣板文字。');
-    console.log('👉 請編輯專案根目錄的 `.env` 檔案，填入您在 Home Assistant 產生的英數長效 Token。');
     process.exit(1);
   }
 
-  const domain = process.argv[2] || 'light';
-  const service = process.argv[3] || 'turn_on';
-  const entityId = process.argv[4] || 'light.dining_room';
+  let domain = process.argv[2] || 'switch';
+  let service = process.argv[3] || 'turn_on';
+  let target = process.argv[4] || '餐廳燈';
+
+  // 檢查別名
+  if (ENTITY_ALIAS[target]) {
+    domain = ENTITY_ALIAS[target].domain;
+    target = ENTITY_ALIAS[target].entity_id;
+  }
 
   const cleanUrl = HA_URL.replace(/\/$/, '');
   const url = `${cleanUrl}/api/services/${domain}/${service}`;
@@ -65,11 +83,11 @@ async function main() {
         'Authorization': `Bearer ${HA_TOKEN}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ entity_id: entityId })
+      body: JSON.stringify({ entity_id: target })
     });
 
     if (res.ok) {
-      console.log(`✅ 成功執行：已開啟 ${entityId} (${domain}.${service})`);
+      console.log(`✅ 成功執行：已對 ${target} 發送 ${domain}.${service}`);
     } else {
       const text = await res.text();
       console.log(`⚠️ 呼叫失敗 (${res.status}): ${text}`);

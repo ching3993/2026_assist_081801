@@ -7,21 +7,18 @@ description: 智慧家庭控制技能：當使用者要求控制燈光、氣氛�
 
 本技能讓 AI 代理人透過 Home Assistant MCP Server 直接掌控智慧家居環境。
 
-## 常用指令與情境
+### 1. 餐廳燈與廚房燈控制
+- **餐廳燈** (`switch.wall_switch_2_cbu_c13b6c_relay_2`)
+- **廚房燈** (`switch.wall_switch_2_cbu_c13b6c_relay_1`)
+- **八樓客廳燈** (`switch.wall_switch_2_cbu_c14e11_relay_2`)
+- **戶外燈** (`switch.wall_switch_2_cbu_c14e11_relay_1`)
 
-### 1. 餐廳燈光控制 (餐廳燈)
 ```powershell
-node scripts/ha_control.js light turn_on light.dining_room
-```
+# 點亮餐廳燈
+node scripts/ha_control.js switch turn_on 餐廳燈
 
-### 2. 離家模式（關閉全屋燈光與開關）
-```powershell
-node scripts/ha_control.js scene turn_on scene.leaving_home
-```
-
-### 3. 開啟專注工作燈
-```powershell
-node scripts/ha_control.js light turn_on light.study_room
+# 點亮廚房燈
+node scripts/ha_control.js switch turn_on 廚房燈
 ```
 
 ## MCP 工具對照
