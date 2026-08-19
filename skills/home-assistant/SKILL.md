@@ -9,16 +9,20 @@ description: 智慧家庭控制技能：當使用者要求控制燈光、氣氛�
 
 ## 常用指令與情境
 
-### 1. 💡 燈光與情境控制
-- **開啟/關閉燈光**：對特定房間或設備進行控制。
-- **調整亮度與顏色**：將書房燈光調整為暖黃光或專注白光。
+### 1. 餐廳燈光控制 (餐廳燈)
+```powershell
+node scripts/ha_control.js light turn_on light.dining_room
+```
 
-### 2. ❄️ 空調與氣候控制
-- **開啟冷氣/暖氣**：設定特定溫度與模式（如 26 度冷氣）。
+### 2. 離家模式（關閉全屋燈光與開關）
+```powershell
+node scripts/ha_control.js scene turn_on scene.leaving_home
+```
 
-### 3. 🏠 全屋模式 (Scenes)
-- **離家模式**：關閉全屋燈光、空調與插座。
-- **專注工作模式**：開啟書房燈光、設定背景音樂或情境。
+### 3. 開啟專注工作燈
+```powershell
+node scripts/ha_control.js light turn_on light.study_room
+```
 
 ## MCP 工具對照
 掛載 `homeassistant` MCP Server 後，Agent 可直接發動：
