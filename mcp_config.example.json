@@ -7,8 +7,8 @@
         "@thelord/enhanced-homeassistant-mcp"
       ],
       "env": {
-        "HOME_ASSISTANT_URL": "http://192.168.1.100:8123",
-        "HOME_ASSISTANT_TOKEN": "請在此貼上您的_LONG_LIVED_ACCESS_TOKEN"
+        "HOME_ASSISTANT_URL": "http://192.168.50.63:8123",
+        "HOME_ASSISTANT_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwNjRmN2I2MTkwYzg0NjFkYmRiYjlkMDc5ZjE5ZjU0NSIsImlhdCI6MTc4NzEyOTcwMywiZXhwIjoyMTAyNDg5NzAzfQ.stHuHzOnTXtG44ud_mq8E8iPro5-0ZNflrXZCsrZjqk"
       }
     }
   }
